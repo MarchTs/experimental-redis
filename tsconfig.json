@@ -1,0 +1,25 @@
+{
+    "compilerOptions": {
+        "module": "commonjs",
+        "target": "ES2017",
+        "lib": ["ES2017", "ES2015", "ES6"],
+        "noImplicitAny": true,
+        "outDir": "./dist",
+        "sourceMap": true,
+        "declaration": false,
+        "baseUrl": "./src",
+        "moduleResolution": "node",
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "resolveJsonModule": true,
+        "isolatedModules": true,
+        "skipLibCheck": true,
+        "noUnusedParameters": false,
+        "noUnusedLocals": false,
+        "allowUnreachableCode": false,
+        "types": ["@types/node"],
+        "typeRoots": ["./typings", "./node_modules", "./node_modules/@types"]
+    },
+    "include": ["src/**/*", "test", "main.ts"],
+    "exclude": ["./node_modules/**/*", "./dist/**/*"]
+}
