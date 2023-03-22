@@ -29,6 +29,16 @@ export abstract class RedisKeyValueStore<T extends string> implements IKeyValueS
         }
         await this.redisConnector.client.del(key);
     }
+
+    public async deleteWhere(keyCondition: string): Promise<void> {
+        if (!this.redisConnector.isReady) {
+            await this.redisConnector.init();
+        }
+        console.log(`Deleting keys where:`, keyCondition);
+        const keys = await this.redisConnector.client.keys(keyCondition);
+        console.log(`Keys to delete:`, keys);
+        await this.redisConnector.client.del([...keys]);
+    }
 }
 
 export class RedisProjectLevelCacheStore<T extends string = string> extends RedisKeyValueStore<T> {
@@ -38,7 +48,7 @@ export class RedisProjectLevelCacheStore<T extends string = string> extends Redi
     }
 
     public getKey(resource: T): string {
-        return `${this.prefix ? this.prefix + "-" : ""}-${this.projectId}-${resource}` as string;
+        return `${this.prefix ? this.prefix + "-" : ""}${this.projectId}-${resource}` as string;
     }
 
     public async get<V = any>(resource: T): Promise<V> {
@@ -51,6 +61,8 @@ export class RedisProjectLevelCacheStore<T extends string = string> extends Redi
     }
 
     public async delete(resource: T): Promise<void> {
-        await super.delete(this.getKey(resource));
+        const key = this.getKey(resource);
+        console.log(`Deleting key:`, key);
+        await super.delete(key);
     }
 }

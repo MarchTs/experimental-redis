@@ -12,6 +12,7 @@
         "app": " node  -r ts-node/register -r tsconfig-paths/register ./src/main.ts"
     },
     "dependencies": {
+        "lodash": "^4.17.21",
         "redis": "^4.6.5",
         "ts-node": "^10.9.1"
     },

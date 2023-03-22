@@ -20,6 +20,6 @@
         "types": ["@types/node"],
         "typeRoots": ["./typings", "./node_modules", "./node_modules/@types"]
     },
-    "include": ["src/**/*", "test", "main.ts"],
+    "include": ["src/**/*", "test", "src/main.ts"],
     "exclude": ["./node_modules/**/*", "./dist/**/*"]
 }
